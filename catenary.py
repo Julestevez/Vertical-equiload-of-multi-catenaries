@@ -15,9 +15,9 @@ vectorX1=np.linspace(0,HorDif,100) #X points of the catenary
 
 #catenary calculus function
 def catenary(HorDif,VerDif,S,VectorX):
-    
+
     #calculus of x0 and y0 (see the reference web)
-    
+
     c=3 #initialization
 
     f1=math.sqrt(S**2 - VerDif**2)/HorDif
@@ -29,7 +29,7 @@ def catenary(HorDif,VerDif,S,VectorX):
         f1=math.sqrt(S**2 - VerDif**2)/HorDif
         f2=math.sinh(HorDif/(2*c))/HorDif*(2*c)
 
-        
+
     x0=3 #initialization
 
     f3= c*math.cosh((HorDif-x0)/c) - c*math.cosh(x0/c)
@@ -38,11 +38,12 @@ def catenary(HorDif,VerDif,S,VectorX):
         x0=x0+0.01
         f3= c*math.cosh((HorDif-x0)/c) - c*math.cosh(x0/c)
 
-    
+
     y0 = VerDif - c*math.cosh((HorDif-x0)/c)
 
     #generate the y points of the catenary
-    y=y0 + c*math.cosh((VectorX-x0)/c)
+    fun = lambda vecX : y0 + c * math.cosh((vecX - x0) / c)
+    y= list(map(fun, VectorX))
 
     return y,x0,y0,c
 
