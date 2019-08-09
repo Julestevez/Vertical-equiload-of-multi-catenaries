@@ -15,6 +15,7 @@ S=200 #length of the catenary in cm
 w=0.005 #weight per unit length [kg/cm]
 vectorX1=np.linspace(0,HorDif,100) #X points of the first catenary
 vectorX2=np.linspace(HorDif,2*HorDif,100) #X points of the second catenary
+#two catenaries, three points.
 
 
 #calculus of vertical descent for equilibrum
