@@ -14,8 +14,7 @@ VerDif=20 #vertical distance between extremes [cm]
 S=200 #length of the catenary in cm
 w=0.005 #weight per unit length [kg/cm]
 vectorX1=np.linspace(0,HorDif,100) #X points of the first catenary
-vectorX2=np.linspace(HorDif,2*HorDif,100) #X points of the second catenary
-#two catenaries, three points.
+
 
 
 #calculus of vertical descent for equilibrum
@@ -79,19 +78,26 @@ def catenary(HorDif,VerDif,S,VectorX):
 
     #generate the y points of the catenary
     fun = lambda vecX : y0 + c * math.cosh((vecX - x0) / c)
-    y= list(map(fun, VectorX))
+    y= list(map(fun, VectorX)) #it's a list
+    y=np.asarray(y)
 
     return y,x0,y0,c
 
 
+#calculate the parameters of the initial catenary
+y0,x0,y_0,c0= catenary(HorDif, 0, S, vectorX1)
+y1,x01,y_1,c1 = catenary(HorDif,0, S, vectorX1)
 
 
-#calculate the parameters of the catenary
+#calculate the parameters of the final catenary
 VerDif=VerticalDescend(S,HorDif,w)
-y,x0,y0,c= catenary(HorDif, VerDif, S, vectorX1)
-#y1,x01,y01,c1 = catenary(HorDif,-VerDif, S, vectorX2)
+y2,x2,y_2,c2= catenary(HorDif, VerDif, S, vectorX1)
+y3,x03,y_3,c3 = catenary(HorDif,-VerDif, S, vectorX1)
 
 #draw the catenary
-plt.plot(vectorX1,y)
-#plt.plot(vectorX2,y1)
+plt.plot(vectorX1,y0,'b')
+plt.plot(vectorX1+HorDif,y1,'b')
+
+plt.plot(vectorX1,y2,'r')
+plt.plot(vectorX1+HorDif,y3+VerDif,'r') 
 plt.show()
