@@ -5,7 +5,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-from mpmath import *
+from mpmath import * #valid for hyperbolic functions
 
 
 #initialization of distances
@@ -14,26 +14,6 @@ VerDif=20 #vertical distance between extremes [cm]
 S=200 #length of the catenary in cm
 w=0.005 #weight per unit length [kg/cm]
 vectorX1=np.linspace(0,HorDif,100) #X points of the first catenary
-
-
-
-#code to get the vertical balance of multiple catenaries
-#formulas obtained from http://www.mecapedia.uji.es/calculo_de_la_catenaria_conocidos_los_puntos_de_amarre_y_la_longitud.htm
-#hyperbolic functions http://mpmath.org/doc/current/functions/hyperbolic.html
-import numpy as np
-import math
-import matplotlib.pyplot as plt
-
-from mpmath import *
-
-
-#initialization of distances
-HorDif=120 #horizontal distance between extremes [cm]
-VerDif=20 #vertical distance between extremes [cm]
-S=200 #length of the catenary in cm
-w=0.005 #weight per unit length [kg/cm]
-vectorX1=np.linspace(0,HorDif,100) #X points of the first catenary
-
 
 
 #calculus of vertical descent for equilibrum
@@ -117,13 +97,15 @@ for i in range(0,4):
     y3,x03,y_3,c3 = catenary(HorDif,-VerDif_vector[i], S, vectorX1)
 
     #draw the catenary
+    plt.cla()
+    plt.xlim(-5,250)
+    plt.ylim(-100,5)
     plt.plot(vectorX1,y0,'b')
     plt.plot(vectorX1+HorDif,y1,'b')
 
     plt.plot(vectorX1,y2,'r')
     plt.plot(vectorX1+HorDif,y3+VerDif_vector[i],'r') 
-    plt.pause(1)
+    plt.pause(0.1)
+    
    
- plt.show()
-
-
+plt.show()
