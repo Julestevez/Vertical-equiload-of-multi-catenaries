@@ -5,7 +5,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-from mpmath import * #valid for hyperbolic functions
+from mpmath import *
 
 
 #initialization of distances
@@ -14,6 +14,7 @@ VerDif=20 #vertical distance between extremes [cm]
 S=200 #length of the catenary in cm
 w=0.005 #weight per unit length [kg/cm]
 vectorX1=np.linspace(0,HorDif,100) #X points of the first catenary
+
 
 
 #calculus of vertical descent for equilibrum
@@ -82,7 +83,8 @@ def catenary(HorDif,VerDif,S,VectorX):
 
     return y,x0,y0,c
 
-
+#TWO CATENARIES, not balanced
+#************************************#
 #calculate the parameters of the initial catenary
 y0,x0,y_0,c0= catenary(HorDif, 0, S, vectorX1)
 y1,x01,y_1,c1 = catenary(HorDif,0, S, vectorX1)
@@ -92,6 +94,8 @@ y1,x01,y_1,c1 = catenary(HorDif,0, S, vectorX1)
 VerDif=VerticalDescend(S,HorDif,w)
 VerDif_vector=np.linspace(0,float(VerDif),5)
 
+
+#ANIMATION OF THE BALANCED CATENARIES
 for i in range(0,4):
     y2,x2,y_2,c2= catenary(HorDif, VerDif_vector[i], S, vectorX1)
     y3,x03,y_3,c3 = catenary(HorDif,-VerDif_vector[i], S, vectorX1)
@@ -105,6 +109,38 @@ for i in range(0,4):
 
     plt.plot(vectorX1,y2,'r')
     plt.plot(vectorX1+HorDif,y3+VerDif_vector[i],'r') 
+    plt.pause(0.1)
+    
+   
+plt.show()
+#END OF TWO CATENARIES
+
+
+
+#THREE CATENARIES
+#*********************************
+y4,x04,y_4,c4= catenary(HorDif, 0, S, vectorX1)
+y5,x05,y_5,c5 = catenary(HorDif,0, S, vectorX1)
+y6,x06,y_6,c6 = catenary(HorDif,0, S, vectorX1)
+
+
+#ANIMATION OF THE BALANCED CATENARIES
+for i in range(0,4):
+    y7,x07,y_7,c7= catenary(HorDif, VerDif_vector[i], S, vectorX1)
+    y8,x08,y_8,c8 = catenary(HorDif,-VerDif_vector[i], S, vectorX1)
+    y9,x09,y_9,c9 = catenary(Hordif, -VerDif_vector[i], S, VectorX1)
+
+    #draw the catenary
+    plt.cla()
+    plt.xlim(-5,250)
+    plt.ylim(-100,5)
+    plt.plot(vectorX1,y4,'b')
+    plt.plot(vectorX1+HorDif,y5,'b')
+    plt.plot(vectorX1+2*HorDif,y6,'b')
+
+    plt.plot(vectorX1,y7,'r')
+    plt.plot(vectorX1+HorDif,y8+VerDif_vector[i],'r') 
+    plt.plot(vectorX1+2*HorDif,y9+VerDif_vector[i],'r')
     plt.pause(0.1)
     
    
